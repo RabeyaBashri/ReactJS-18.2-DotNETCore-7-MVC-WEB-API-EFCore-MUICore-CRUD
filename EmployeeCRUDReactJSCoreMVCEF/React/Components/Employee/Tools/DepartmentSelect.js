@@ -1,6 +1,5 @@
 ﻿//IMPORT CORE REACT
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 
 //IMPORT SELECT CONTROL
 import Box from '@mui/material/Box';
@@ -12,11 +11,9 @@ import Select from '@mui/material/Select';
 //IMPORT TOOLS
 //import EmployeeTBLByDepartment from './EmployeeTBLByDepartment';//RAW BASIC HTML TABLE
 import EmployeeDataGridByDepartment from './EmployeeDataGridByDepartment';//REACT DATAGRID MATERIAL UI COMPONENT
+import { rootdivEmployeeTbl } from './rootEmployee';
 
-//import ClearFormDataBtn from './ClearFormDataBtn';
-//import GoToEmployeeTblBtn from './GoToEmployeeTblBtn';
 ////// CREATE & INITIALIZE DEPARTMENT LIST CLASS
-
 class DepartmentSelect extends React.Component {
     constructor(props) {
         super(props);
@@ -82,8 +79,11 @@ class DepartmentSelect extends React.Component {
             selectedDepartmentID: selectedDepartmentID
 
         });
-        document.getElementById('divEmployeeByDept').style.visibility = 'visible';
-        ReactDOM.createRoot(document.getElementById('divEmployeeTbl')).render(<EmployeeDataGridByDepartment departmentID={selectedDepartmentID} />);
+       
+        document.getElementById('divEmployeeByDept').style.display = 'block';
+        document.getElementById('divManageEmployee').style.display = 'none';
+        rootdivEmployeeTbl.render(<EmployeeDataGridByDepartment departmentID={selectedDepartmentID} rootdivEmployeeTbl={rootdivEmployeeTbl} />);
+
     }
 
     render() {

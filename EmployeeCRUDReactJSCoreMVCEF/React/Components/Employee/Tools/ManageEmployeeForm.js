@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-
+import ReactDOM from 'react-dom/client';
 //REACT DATE PICKER WORKING VERSION
 ///FOR REACT DATEPICKER - INSTEAD OF 'VALUE', 'SELECTED' IS USED TO SET AND GET DATE VALUE
 //import DatePicker from 'react-datepicker';
@@ -18,11 +18,13 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 import { EntityState } from './EntityStateByAction';
+import EmployeeDataGridByDepartment from './EmployeeDataGridByDepartment';
 
 class ManageEmployeeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            rootdivEmployeeTbl : props.rootdivEmployeeTbl,
             employee: (props.editEmp) ? props.editEmp : {},
             employeeID: props.employeeID,
             departmentID: props.departmentID,
@@ -35,6 +37,20 @@ class ManageEmployeeForm extends React.Component {
         this.handleContactNoChange = this.handleContactNoChange.bind(this);
         this.handleAddressChange = this.handleAddressChange.bind(this);
         this.handlePositionChange = this.handlePositionChange.bind(this);
+        this.handleClearForm = this.handleClearForm.bind(this);
+        this.HandleGoToEmployeeList = this.HandleGoToEmployeeList.bind(this);
+    }
+
+    loadEmployeeGrid() {
+        document.getElementById('divEmployeeByDept').style.display = 'block';
+        document.getElementById('divManageEmployee').style.display = 'none';
+       // const rootdivEmployeeTbl = ReactDOM.createRoot(document.getElementById('divEmployeeTbl'));
+        //rootdivEmployeeTbl.unmount();
+      // ReactDOM.createRoot(document.getElementById('divEmployeeTbl')).render(<EmployeeDataGridByDepartment departmentID={this.state.departmentID} />);
+       // ReactDOM.render(<EmployeeDataGridByDepartment departmentID={this.state.departmentID} />, document.getElementById('divEmployeeTbl'));
+
+        // ReactDOM.findDOMNode(document.getElementById('divEmployeeTbl')).unmount();
+        this.state.rootdivEmployeeTbl.render(<EmployeeDataGridByDepartment departmentID={this.state.departmentID} />);
     }
 
     componentDidMount() {
@@ -126,11 +142,31 @@ class ManageEmployeeForm extends React.Component {
                     (result) => {
                         if (result.returnStatus == 'Success') {
                             alert('Exisiting Employee Updated Sucessfully : ' + jsonStringEmployeeObj);
+                            this.loadEmployeeGrid();
                         }
                     }
                 )
         }
     }
+
+
+    handleClearForm(e) {
+        this.setState((state, props) => {
+            let employee = state.employee
+            employee.Name = '';
+            employee.Email = '';
+            employee.ContactNo = '';
+            employee.Address = '';
+            employee.HiredOn = '';
+            employee.Dob = '';
+            return { employee: employee }
+        });
+    }
+
+    HandleGoToEmployeeList(e) {
+        this.loadEmployeeGrid();
+    }
+
 
     render() {
         return (
@@ -141,11 +177,12 @@ class ManageEmployeeForm extends React.Component {
                     maxWidth: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    '& .MuiTextField-root': { width: '25ch' }
+                    '& .MuiTextField-root': { width: '70ch' }
                 }}
                 noValidate
                 autoComplete="off"
             >
+
                 <TextField fullWidth margin="normal" required id="txtName" label="Name" variant="standard" value={this.state.employee.Name} onChange={this.handleNameChange} />
                
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -172,6 +209,8 @@ class ManageEmployeeForm extends React.Component {
                     onChange={this.handlePositionChange} />
                 <Stack spacing={2} direction="row">
                     <Button variant="contained" onClick={(e) => this.onSubmit(e)}>Save</Button>
+                    <Button variant="contained" onClick={this.handleClearForm}>Clear Form</Button>
+                    <Button variant="contained" onClick={this.HandleGoToEmployeeList}>Go To Employee List</Button>
                 </Stack>
             </Box>
         );

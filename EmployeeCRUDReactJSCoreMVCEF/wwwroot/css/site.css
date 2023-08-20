@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+.divRow {
+    margin: 0.5em 0;
+}
+.css-1x51dt5-MuiInputBase-input-MuiInput-input, .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    margin: 0.7em 0 !important;
+}

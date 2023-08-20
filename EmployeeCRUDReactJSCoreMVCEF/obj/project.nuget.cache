@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gHRXNY6TatyvCJtJpJ2sUz0gjTYJFFjH8hfT7YkWorLTouM9awn+kpcAUzvDNfssK9zM6618sSYfWbQgBxF10w==",
+  "dgSpecHash": "CgnPmWSNGI/12aGXG44R5woCNnzZxC4LpbL1pWKPhmCWCvANdOXy0mVpu/feTveUVSoJDd17hu9s8dygI1xbcA==",
   "success": true,
-  "projectFilePath": "E:\\GitHubProjects\\EmployeeCRUDReactJSCoreMVC\\EmployeeCRUDReactJSCoreMVCEF\\EmployeeCRUDReactJSCoreMVCEF.csproj",
+  "projectFilePath": "E:\\GitHubProjects\\EmployeeCRUDReactJSCoreMVC\\ReactJS-DotNET-MVC-WEB-API-EFCore-MUICore\\EmployeeCRUDReactJSCoreMVCEF\\EmployeeCRUDReactJSCoreMVCEF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arif Murshed\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Arif Murshed\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

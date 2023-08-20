@@ -6,11 +6,12 @@ import Button from '@mui/material/Button';
 import ManageEmployeeForm from './ManageEmployeeForm';//MANAGEEMPLOYEE.JS WITH RAW HTML INPUT FORM CONTROL
 import { EntityState } from './EntityStateByAction.ts';
 
+
 const  AddEmployeeBtn = (props) => {
     const handleClick = () => {
-        document.getElementById('divEmployeeByDept').style.visibility = 'hidden';
-        document.getElementById('divManageEmployee').style.visibility = 'visible';
-        ReactDOM.createRoot(document.getElementById('divManageEmployee')).render(<ManageEmployeeForm action={EntityState.Add} departmentID={props.departmentID} />);
+        document.getElementById('divEmployeeByDept').style.display = 'none';
+        document.getElementById('divManageEmployee').style.display = 'block';
+        ReactDOM.createRoot(document.getElementById('divManageEmployee')).render(<ManageEmployeeForm action={EntityState.Add} departmentID={props.departmentID} rootdivEmployeeTbl={props.rootdivEmployeeTbl} />);
     };
 
     return (

@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom/client';
 import ManageEmployeeForm from './ManageEmployeeForm';//MANAGEEMPLOYEE.JS WITH RAW HTML INPUT FORM CONTROL
 import AddEmployeeBtn from './AddEmployeeBtn';
 import { EntityState } from './EntityStateByAction.ts';
-
+import { rootdivAddEmployeeBtn } from './rootEmployee';
 
 ////// CREATE & INITIALIZE Employee TABLE By Department CLASS
 class EmployeeDataGridByDepartment extends React.Component {
@@ -16,6 +16,7 @@ class EmployeeDataGridByDepartment extends React.Component {
         super(props);
 
         this.state = {
+            rootdivEmployeeTbl: props.rootdivEmployeeTbl,
             isLoaded: false,
             employees: [],
             departmentID: props.departmentID,
@@ -54,7 +55,7 @@ class EmployeeDataGridByDepartment extends React.Component {
     }
 
     componentDidMount() {
-        ReactDOM.createRoot(document.getElementById('divAddEmployeeBtn')).render(<AddEmployeeBtn departmentID={this.state.departmentID} />);
+        rootdivAddEmployeeBtn.render(<AddEmployeeBtn departmentID={this.state.departmentID} rootdivEmployeeTbl={this.state.rootdivEmployeeTbl} />);
         this.fetchRemoteItems();
     }
 
@@ -136,9 +137,11 @@ class EmployeeDataGridByDepartment extends React.Component {
         })
         let jsonStringEmployeeObj = JSON.stringify(editEmp);
 
-        document.getElementById('divEmployeeByDept').style.visibility = 'hidden';
-        document.getElementById('divManageEmployee').style.visibility = 'visible';
-        ReactDOM.createRoot(document.getElementById('divManageEmployee')).render(<ManageEmployeeForm action={EntityState.Update} departmentID={this.state.departmentID} employeeID={emdID} editEmp={editEmp} />);
+        document.getElementById('divEmployeeByDept').style.display = 'none';
+        document.getElementById('divManageEmployee').style.display = 'block';
+       // this.state.rootdivEmployeeTbl.unmount();
+        
+        ReactDOM.createRoot(document.getElementById('divManageEmployee')).render(<ManageEmployeeForm action={EntityState.Update} departmentID={this.state.departmentID} employeeID={emdID} editEmp={editEmp} rootdivEmployeeTbl={this.state.rootdivEmployeeTbl } />);
         //ReactDOM.createRoot(document.getElementById('divGoToEmployeeTblBtn')).render(<GoToEmployeeTblBtn />);
         //ReactDOM.createRoot(document.getElementById('divClearFormDataBtn')).render(<ClearFormDataBtn />);
     }
